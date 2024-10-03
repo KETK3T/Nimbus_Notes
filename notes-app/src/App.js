@@ -3,7 +3,9 @@ import { useEffect, useState } from "react"
 import {nanoid} from 'nanoid'
 import Search from "./components/Search"
 import Header from "./components/Header"
- 
+import SignUp from "./components/SignUp"
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+
 const App = () => {
   const [notes,setNotes] = useState([])
 
@@ -62,17 +64,24 @@ const App = () => {
     // using a template string to dynamically determine darkmode
     // if darkmode = true add dark-mode to classname
       <div className={`${darkMode && 'dark-mode'}`}>
-        <div className="container">
-          <Header handleToggleDarkMode={setDarkMode}/>
-          <Search handleSearchNote={setSearchText}/>
-          {/* note list takes in 3 props */}
-            <NoteList 
-            // take curr list of note and filter only the ones in search
-              notes={notes.filter((note) => note.text.toLowerCase().includes(searchText))} 
-              handleAddNote={addNote} 
-              handleDeleteNote={delNote}
-            />
-        </div>
+        <Router>
+          <Routes>
+            <Route exact path = '/' element = {<SignUp />} />
+            <Route exact path='/home' element={
+              <div className="container">
+                <Header handleToggleDarkMode={setDarkMode}/>
+                <Search handleSearchNote={setSearchText}/>
+                {/* note list takes in 3 props */}
+                  <NoteList 
+                  // take curr list of note and filter only the ones in search
+                    notes={notes.filter((note) => note.text.toLowerCase().includes(searchText))} 
+                    handleAddNote={addNote} 
+                    handleDeleteNote={delNote}
+                  />
+              </div>
+            }/>
+          </Routes>
+        </Router>
       </div>
   )
 }

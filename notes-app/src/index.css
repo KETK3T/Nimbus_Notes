@@ -25,6 +25,39 @@ code {
 .dark-mode h1{
   color: white;
 }
+.signup{
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 500px;
+  padding-right: 15px;
+  padding-top: 200px;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup-container{
+  max-width: 300px;
+  display: flex;
+  align-items: center;
+  flex-direction: column  ;
+  background-color: #e1e1e1;
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: 1.5em;
+  font-size: larger;
+}
+
+.signup input{
+  border: none;
+  background-color: #e1e1e1;
+  font-size: larger;
+}
+
+.signup input:focus{
+  outline: none;
+}
 
 .container{
   /* limit container items to  */
@@ -47,6 +80,7 @@ code {
   grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
   font-size: larger;
   font-family: 'Times New Roman', Times, serif;
+  padding-bottom: 15px  ;
 }
 
 .note.new{
