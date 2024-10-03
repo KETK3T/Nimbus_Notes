@@ -9,5 +9,115 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  monospace;
 }
+
+.header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dark-mode{
+  background-color: black;
+}
+
+.dark-mode h1{
+  color: white;
+}
+
+.container{
+  /* limit container items to  */
+  max-width: 960px;
+  /* keep notes in middle of screen regardless of screen size */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  min-height: 100vh;
+}
+
+.note-list{
+  display: grid;
+  /* add spacing between each grid item */
+  grid-gap: 1rem;
+  /* auto amounts of columns to be dynamic, each with a min width of 250px but can't be more than 1 fractional unit (fr) */
+  /* a fractional unit means what ever space is available */
+  /* fit as many columns as you can in a row */
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  font-size: larger;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.note.new{
+  background-color: aquamarine;
+}
+textarea{
+  border: none;
+  resize: none;
+  background-color: aquamarine;
+  font-size: larger;
+  font-family: 'Times New Roman', Times, serif;
+}
+textarea:focus{
+  outline: none;
+}
+
+.save{
+  background-color: #e1e1e1;
+  border: none;
+  border-radius: 15px;
+  /* padding top right bottom left */
+  padding: 5px 10px 5px 10px;
+}
+
+.save:hover{
+  background-color: #ededed;
+  cursor: pointer;
+}
+
+.note {
+  background-color: #fef68a;
+  border-radius: 10px;
+  padding: 1rem;
+  min-height: 170px;
+  /* horizontal or vertical alignment in a line use flex box default is horizontal */
+  /* flex box ignores any non direct children */
+  display: flex; 
+  /* stack vertically */
+  flex-direction: column;
+  /* Evenly space items within note container with first item at start and last at end */
+  justify-content: space-between;
+  /* keep any spacing that was added to the text */
+  white-space: pre-wrap;
+}
+
+.note-footer{
+  display: flex;
+  /* vertically aligns items to the center of the container */
+  align-items: center;
+  justify-content: space-between;
+}
+
+.delete-icon{
+  cursor: pointer;
+}
+
+.search{
+  display: flex;
+  align-items: center;
+  background-color: #e1e1e1;
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: 1.5em;
+}
+
+.search input{
+  border:none;
+  background-color: #e1e1e1;
+}
+
+.search input:focus{
+  outline: none;
+}
+
