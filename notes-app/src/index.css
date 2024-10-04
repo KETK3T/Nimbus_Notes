@@ -42,20 +42,37 @@ code {
   display: flex;
   align-items: center;
   flex-direction: column  ;
-  background-color: #e1e1e1;
+  background-color: tomato;
   border-radius: 10px;
   padding: 5px;
   margin-bottom: 1.5em;
   font-size: larger;
 }
 
-.signup input{
-  border: none;
-  background-color: #e1e1e1;
-  font-size: larger;
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.signup input:focus{
+.form-control{
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-control input{
+  border: none;
+  background-color: tomato;
+  font-size: larger;
+  max-width: 100%;
+}
+
+.form-control input:focus{
   outline: none;
 }
 
