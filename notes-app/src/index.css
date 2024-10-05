@@ -68,7 +68,7 @@ form {
 .form-control input{
   border: none;
   background-color: tomato;
-  font-size: larger;
+  font-size: medium;
   max-width: 100%;
 }
 

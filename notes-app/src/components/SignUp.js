@@ -1,11 +1,12 @@
 import React, { useState } from "react"
-import { useNavigate,Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const SignUp = () =>{
 
 	const [formData, setFormData] = useState({
 		username:'',
-		email:''
+		email:'',
+		password:''
 	})
 
 	const navigate = useNavigate()
@@ -18,17 +19,29 @@ const SignUp = () =>{
 		})
 	}
 
-	const handleSubmit = (event) =>{
+	const handleSubmit = async (event) =>{
 		// prevent refresh
 		event.preventDefault()
 
-		// store username and email in variables
-		const {username,email} = formData
-		
-		console.log(username)
-		console.log(email)
-		
-		navigate('/home');
+		try {
+			const response = await fetch("http://localhost:8080/api/registration",{
+				method: 'POST',
+				headers: {
+					'Content-type': 'application/json',
+				},
+				body: JSON.stringify(formData)
+			})
+
+			if(response.ok){
+				console.log('Registration Successful, Please check your email for verification.')
+				navigate('/home')
+			}else{
+				const errorData = await response.json()
+				console.error('Registration failed',errorData.message || 'Unknown error')
+			}
+		}catch(error){
+			console.error("Error:",error)
+		}
 	}
 
 
@@ -45,6 +58,7 @@ const SignUp = () =>{
 						<input 
 							className="signup-input"
 							name="username"
+							placeholder="______________________"
 							value={formData.username}
 							onChange={handleChange}
 							type="text"
@@ -59,9 +73,24 @@ const SignUp = () =>{
 						<input 
 							className="signup-input"
 							name="email"
+							placeholder="______________________"
 							value={formData.email}
 							onChange={handleChange}
-							type="text"
+							type="email"
+							required
+						/>
+					</div>
+					<div className="form-control">
+						<label className="signup-label">
+							Password:
+						</label>
+						<input 
+							className="signup-input"
+							name="password"
+							placeholder="______________________"
+							value={formData.password}
+							onChange={handleChange}
+							type="password"
 							required
 						/>
 					</div>
