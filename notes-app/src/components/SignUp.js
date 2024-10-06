@@ -34,7 +34,7 @@ const SignUp = () =>{
 
 			if(response.ok){
 				console.log('Registration Successful, Please check your email for verification.')
-				navigate('/home')
+				await checkEmailVerification(formData.email)
 			}else{
 				const errorData = await response.json()
 				console.error('Registration failed',errorData.message || 'Unknown error')
@@ -43,6 +43,31 @@ const SignUp = () =>{
 			console.error("Error:",error)
 		}
 	}
+
+	const checkEmailVerification = async (email) => {
+		const maxAttempts = 50
+		const interval = 10000
+		for(let attempt = 1; attempt <= maxAttempts; attempt++){
+			const response = await fetch(`http://localhost:8080/api/registration/check-verification?email=${email}`)
+
+			if(response.ok){
+				const data = await response.json()
+				if(data){
+					console.log("Email verification successful")
+					navigate('/home')
+					return
+				}
+			}else{
+				console.error('Failed to check verification status')
+			}
+			await new Promise(res => setTimeout(res,interval))
+		}
+
+		console.error("Email verification timed out")
+	}
+	
+
+
 
 
 

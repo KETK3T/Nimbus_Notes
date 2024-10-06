@@ -15,15 +15,16 @@ public class WebSecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 		http
-			.authorizeHttpRequests(auth -> auth
-				.requestMatchers("/api/registration/**").permitAll()
-				.anyRequest().authenticated()
+				.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
+				.authorizeHttpRequests(auth -> auth
+					.requestMatchers("/api/registration/**").permitAll()
+					.anyRequest().permitAll()
 			)
 			.formLogin(formLogin -> formLogin
-				.loginPage("/")
-				.permitAll()
+				.defaultSuccessUrl("/home",true)
 			)
-			.rememberMe(Customizer.withDefaults());
+				.logout(config -> config.logoutSuccessUrl("/"))
+				.rememberMe(Customizer.withDefaults());
 
 			return http.build();
 	}

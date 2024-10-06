@@ -25,7 +25,7 @@ public class UserService {
 
 	@Transactional
 	public void registerUser(User user){
-
+		System.out.println("Registering User: " + user);
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		userRepository.save(user);
 		sendVerificationEmail(user);
@@ -33,10 +33,12 @@ public class UserService {
 
 	private void sendVerificationEmail(User user){
 		SimpleMailMessage message = new SimpleMailMessage();
+		message.setFrom("jimi3rdacc@gmail.com");
 		message.setTo(user.getEmail());
 		message.setSubject("Email verification");
 		message.setText("Click the link to verify your email: http://localhost:8080/api/registration/verify-email?email=" + user.getEmail());
 		mailSender.send(message);
+		System.out.println("Email sent :)");
 	}
 
 	public void verifyEmail(String email){
